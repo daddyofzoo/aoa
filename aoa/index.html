@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Receita do Sal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100%;
+            background: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(ellipse at 50% 0%, #1a1408 0%, #0a0a0a 60%);
+            color: #f5f5f5;
+            padding: 24px 16px 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== PARTÍCULAS DE FUNDO ===== */
+        #particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* ===== CONTAINER ===== */
+        .vsl-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ===== LOGO ===== */
+        .vsl-logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .vsl-logo img {
+            max-height: 52px;
+            width: auto;
+            opacity: 0.9;
+            border-radius: 6px;
+        }
+
+        /* ===== BADGE ===== */
+        .vsl-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #f5a623;
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            animation: badgePulse 2s infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(245, 166, 35, 0); }
+        }
+
+        /* ===== HEADLINE ===== */
+        .vsl-headline {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #f5f5f5;
+            letter-spacing: -0.5px;
+            margin-bottom: 28px;
+            animation: screenIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .vsl-headline .highlight {
+            color: #f5a623;
+            -webkit-text-fill-color: #f5a623;
+            position: relative;
+            display: inline-block;
+        }
+        .vsl-headline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f5a623, transparent);
+        }
+
+        @keyframes screenIn {
+            0% { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* ===== VSL PURA (SEM ESTILIZAÇÃO) ===== */
+        .vsl-player {
+            width: 100%;
+            margin: 0 auto 32px;
+            animation: screenIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .vsl-player vturb-smartplayer {
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+      /* ===== WRAPPER COM BORDER RADIUS ===== */
+        .vsl-frame {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Forçar o player a respeitar o wrapper */
+        .vsl-frame vturb-smartplayer,
+        .vsl-frame vturb-smartplayer > div,
+        .vsl-frame vturb-smartplayer iframe,
+        .vsl-frame vturb-smartplayer video,
+        .vsl-frame #ifr_6ab68817be6066e07d2ee5e8,
+        .vsl-frame [id^="ifr_"] {
+            max-width: 100% !important;
+            width: 100% !important;
+            display: block !important;
+            border-radius: 2px !important;   /* ← mesmo raio no player */
+            overflow: hidden !important;
+        }
+
+        /* Placeholder mantém aspect ratio 9:16 */
+        .vsl-frame .vturb-player-placeholder {
+            padding-top: 177.77% !important;
+        }
+        /* ===== COMENTÁRIOS ===== */
+        .comments-section {
+            animation: screenIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .comments-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #1e1e1e;
+            margin-bottom: 20px;
+        }
+        .comments-header .title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #f5f5f5;
+            letter-spacing: -0.2px;
+        }
+        .comments-header .live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(245, 166, 35, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #f5a623;
+            letter-spacing: 0.3px;
+        }
+        .comments-header .live i {
+            font-size: 7px;
+            color: #f5a623;
+            animation: pulse-dot 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse-dot {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== COMENTÁRIO ===== */
+        .comment {
+            background: #141414;
+            border: 1.5px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 12px;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: commentIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        @keyframes commentIn {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .comment:hover {
+            border-color: #3a3a3a;
+            transform: translateX(2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+
+        .comment .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: #2a2a2a;
+            background-size: cover;
+            background-position: center;
+            border: 1.5px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: #f5a623;
+        }
+
+        .comment .content { flex: 1; min-width: 0; }
+
+        .comment .author {
+            font-weight: 700;
+            font-size: 13px;
+            color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .comment .author .time {
+            font-weight: 500;
+            color: #666;
+            font-size: 11px;
+        }
+        .comment .author .verified {
+            color: #f5a623;
+            font-size: 11px;
+        }
+
+        .comment .text {
+            font-size: 14px;
+            line-height: 1.55;
+            color: #c8c8c8;
+            margin: 6px 0 10px;
+            word-break: break-word;
+        }
+        .comment .text strong {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+
+        .comment .actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: #666;
+        }
+        .comment .actions .like-count {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: color 0.2s;
+            font-weight: 600;
+        }
+        .comment .actions .like-count:hover {
+            color: #f5a623;
+        }
+        .comment .actions .like-count i {
+            font-size: 12px;
+        }
+        .comment .actions .like-count.liked {
+            color: #f5a623;
+        }
+        .comment .actions .reply {
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        .comment .actions .reply:hover {
+            color: #f5a623;
+        }
+
+        /* ===== COMENTÁRIO RESPOSTA ===== */
+        .comment.reply {
+            margin-left: 32px;
+            border-left: 2px solid #f5a623;
+            background: #101010;
+        }
+
+        /* ===== FECHO DOS COMENTÁRIOS ===== */
+        .comments-closed {
+            text-align: center;
+            color: #555;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 20px 0 10px;
+            border-top: 1px solid #1e1e1e;
+            margin-top: 14px;
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 480px) {
+            body { padding: 18px 12px 50px; }
+            .vsl-headline { font-size: 20px; }
+            .vsl-logo img { max-height: 42px; }
+            .comment { padding: 12px 12px; }
+            .comment .avatar { width: 34px; height: 34px; font-size: 13px; }
+            .comment .text { font-size: 13px; }
+            .comment.reply { margin-left: 20px; }
+            .comments-header .title { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PARTÍCULAS DE FUNDO -->
+    <canvas id="particles"></canvas>
+
+    <div class="vsl-wrap">
+
+
+        <!-- HEADLINE DESTACADA -->
+        <h1 class="vsl-headline">
+    O <span class="highlight">segredo </span> que está a fazer homens voltarem a ficar <span class="highlight">duros como aos 20 anos</span> usando apenas <span class="highlight">sal de Cozinha</span>
+        </h1>
+
+        <!-- VSL PURA -->
+        <div class="vsl-player">
+            <div class="vsl-frame">
+                <vturb-smartplayer id="vid-6ab68817be6066e07d2ee5e8">
+                    <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div>
+                </vturb-smartplayer>
+            </div>
+            <script type="text/javascript">
+                var s=document.createElement("script");
+                s.src="https://scripts.converteai.net/2c3d960f-39c3-4072-a7af-c60fed7da363/players/6ab68817be6066e07d2ee5e8/v4/player.js";
+                s.async=!0,document.head.appendChild(s);
+            </script>
+        </div>
+
+     <!-- COMENTÁRIOS -->
+<div class="comments-section">
+    <div class="comments-header">
+        <span class="title">1.321 Comentários</span>
+    </div>
+
+    <div class="comment" data-id="1">
+        <div class="avatar" style="background-image: url('images/1.jpg');"></div>
+        <div class="content">
+            <div class="author">Carlos Silva <span class="time">Há 2 horas</span></div>
+            <div class="text">Depois de 8 anos dependente de Viagra, finalmente estou livre! Usei o sal por 3 dias e tive a ereção mais forte da minha vida. <strong>Minha esposa não acreditou!</strong> 😲</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 254</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" data-id="3">
+        <div class="avatar" style="background-image: url('images/2.jpg');"></div>
+        <div class="content">
+            <div class="author">João Santos <span class="time">Há 1 hora</span></div>
+            <div class="text">Sofri 12 anos de impotência e já tinha perdido as esperanças. Com o truque do sal, em uma semana meu pênis ficou mais grosso e as ereções duram <strong>40+ minutos</strong>. Revolucionário!</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 189</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" data-id="4">
+        <div class="avatar" style="background-image: url('images/3.jpg');"></div>
+        <div class="content">
+            <div class="author">Miguel Costa <span class="time">Há 1 hora</span></div>
+            <div class="text">Aos 61 anos, achei que minha vida sexual tinha acabado. Mas com esse método natural de sal, voltei a ter ereções como aos 25! <strong>Minha mulher está impressionada</strong> e nossa relação renasceu.</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 312</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" data-id="5">
+        <div class="avatar" style="background-image: url('images/4.jpg');"></div>
+        <div class="content">
+            <div class="author">António Fernandes <span class="time">Há 19 minutos</span></div>
+            <div class="text">Gastava mais de 5.000 meticais por mês em Viagra e sprays. Agora com o sal, tenho ereções naturais que duram <strong>mais de 50 minutos</strong>. Economizo dinheiro e tenho melhor desempenho</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 147</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" data-id="6">
+        <div class="avatar" style="background-image: url('images/5.jpg');"></div>
+        <div class="content">
+            <div class="author">Paulo Machava <span class="time">Há 19 minutos</span></div>
+            <div class="text">Depois do infarto, os médicos proibiram Viagra. Pensei que nunca mais teria uma vida sexual normal. O sal me salvou, é <strong>100% natural</strong> e não faz mal ao coração. Ereções duras como pedra!</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 98</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" data-id="7">
+        <div class="avatar" style="background-image: url('images/6.jpg');"></div>
+        <div class="content">
+            <div class="author">Ricardo Dauto <span class="time">Há 19 minutos</span></div>
+            <div class="text">Minha autoestima estava no chão. Com 49 anos já não conseguia mais ter relações. O truque do sal mudou tudo - em 10 dias meu pênis cresceu <strong>3cm</strong> e as ereções são explosivas! Minha mulher não para de elogiar.</div>
+            <div class="actions">
+                <span class="like-count"><i class="fas fa-thumbs-up"></i> 215</span>
+                <span class="reply">Responder</span>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="comments-closed">Este post já não está a receber comentários!</h4>
+</div>
+
+    </div>
+
+    <script>
+        /* ============================================================
+           PARTÍCULAS DE FUNDO
+        ============================================================ */
+        (function() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (let i = 0; i < 40; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 1.5 + 0.3,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    o: Math.random() * 0.4 + 0.1
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(245, 166, 35, ${p.o})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ============================================================
+           CONTADOR AO VIVO
+        ============================================================ */
+        const liveSpan = document.getElementById('liveCount');
+        if (liveSpan) {
+            setInterval(() => {
+                const base = 1234;
+                const variation = Math.floor(Math.random() * 400) - 200;
+                const val = Math.max(800, base + variation);
+                liveSpan.textContent = val.toLocaleString('pt-PT');
+            }, 15000);
+        }
+
+        /* ============================================================
+           LIKES NOS COMENTÁRIOS
+        ============================================================ */
+        document.querySelectorAll('.comment .like-count').forEach(el => {
+            const icon = el.querySelector('i');
+            const textNode = el.childNodes[1];
+            let count = parseInt(textNode.textContent.trim()) || 0;
+            let liked = false;
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!liked) {
+                    count += 1;
+                    liked = true;
+                    el.classList.add('liked');
+                    icon.style.color = '#f5a623';
+                } else {
+                    count -= 1;
+                    liked = false;
+                    el.classList.remove('liked');
+                    icon.style.color = '';
+                }
+                textNode.textContent = ' ' + count;
+            });
+        });
+
+        /* ============================================================
+           REPLY (FECHADO)
+        ============================================================ */
+        document.querySelectorAll('.reply').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('💬 Os comentários estão fechados para esta demonstração.');
+            });
+        });
+    </script>
+
+</body>
+</html>
