@@ -1205,32 +1205,6 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         })();
 
         /* ============================================================
-           SOM SUBTIL (Web Audio API)
-        ============================================================ */
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        let audioCtx = null;
-
-        function playTone(freq, duration, type = 'sine', vol = 0.04) {
-            try {
-                if (!audioCtx) audioCtx = new AudioCtx();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.value = freq;
-                gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch(e) {}
-        }
-
-        function soundClick() { playTone(880, 0.08, 'sine', 0.03); }
-        function soundSelect() { playTone(1200, 0.12, 'sine', 0.05); setTimeout(() => playTone(1600, 0.1, 'sine', 0.04), 60); }
-        function soundDone() { playTone(660, 0.15, 'sine', 0.05); setTimeout(() => playTone(880, 0.15, 'sine', 0.05), 120); setTimeout(() => playTone(1320, 0.3, 'sine', 0.06), 240); }
-
-        /* ============================================================
            QUIZ LOGIC
         ============================================================ */
         document.addEventListener('DOMContentLoaded', () => {
