@@ -1205,7 +1205,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         })();
 
         /* ============================================================
-           QUIZ LOGIC
+           QUIZ LOGIC  (som removido — sem chamadas a soundClick/soundSelect/soundDone)
         ============================================================ */
         document.addEventListener('DOMContentLoaded', () => {
             const screens = document.querySelectorAll('.screen');
@@ -1230,7 +1230,6 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
 
             // ---- INÍCIO ----
             startBtn.addEventListener('click', () => {
-                soundClick();
                 introScreen.classList.remove('active');
                 stepsContainer.style.display = 'block';
                 showStep(0);
@@ -1277,7 +1276,6 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                     const parent = this.closest('.step');
                     parent.querySelectorAll('.option').forEach(b => b.classList.remove('selected'));
                     this.classList.add('selected');
-                    soundSelect();
 
                     const val = this.getAttribute('data-value');
                     const idx = parseInt(parent.getAttribute('data-step'));
@@ -1294,7 +1292,6 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                 stepsContainer.style.display = 'none';
                 analysisScreen.classList.add('active');
                 fitToViewport();
-                soundDone();
 
                 circle.style.strokeDasharray = CIRCUM;
                 circle.style.strokeDashoffset = CIRCUM;
@@ -1332,7 +1329,6 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                             resultScreen.classList.add('active');
                             fitToViewport();
                             animateBlockMeter();
-                            soundDone();
                         }, 900);
                     }
                 }, 60);
